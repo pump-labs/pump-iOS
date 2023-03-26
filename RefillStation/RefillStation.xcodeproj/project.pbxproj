@@ -485,6 +485,15 @@
 			path = MyPageScene;
 			sourceTree = "<group>";
 		};
+		323F879C29D0399F00024B65 /* SplashScene */ = {
+			isa = PBXGroup;
+			children = (
+				323F879429D01F1C00024B65 /* SplashViewController.swift */,
+				323F879629D01F2200024B65 /* SplashViewModel.swift */,
+			);
+			path = SplashScene;
+			sourceTree = "<group>";
+		};
 		324355552956D40D0043E53B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -595,8 +604,7 @@
 				FC3E8CF62976EAE100FE65F6 /* NicknameScene */,
 				322E15EF297A6C5A00FE2E2F /* MyPageScene */,
 				32CCC0D829793EDE00C04231 /* MainTabBarController.swift */,
-				323F879429D01F1C00024B65 /* SplashViewController.swift */,
-				323F879629D01F2200024B65 /* SplashViewModel.swift */,
+				323F879C29D0399F00024B65 /* SplashScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";

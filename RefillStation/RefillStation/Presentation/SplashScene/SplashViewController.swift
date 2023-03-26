@@ -12,7 +12,7 @@ final class SplashViewController: UIViewController {
 
     var cooridnator: SplashCoordinator?
     private let viewModel: SplashViewModel
-    private let splashImageView = UIImageView(image: Asset.Images.iconPump.image)
+    private let logoImageView = UIImageView(image: Asset.Images.iconPump.image)
 
     init(viewModel: SplashViewModel) {
         self.viewModel = viewModel
@@ -26,6 +26,8 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+        bind()
+        viewModel.startFlow()
     }
 
     private func bind() {
@@ -42,9 +44,10 @@ final class SplashViewController: UIViewController {
     }
 
     private func layout() {
-        view.addSubview(splashImageView)
-        splashImageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        view.backgroundColor = Asset.Colors.primary10.color
+        view.addSubview(logoImageView)
+        logoImageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 }
