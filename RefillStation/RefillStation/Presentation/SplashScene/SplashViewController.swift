@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SplashViewController: UIViewController {
+final class SplashViewController: UIViewController, ServerAlertable {
 
     var cooridnator: SplashCoordinator?
     private let viewModel: SplashViewModel
@@ -40,6 +40,9 @@ final class SplashViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.cooridnator?.startOnboarding()
             }
+        }
+        viewModel.showErrorAlert = { [weak self] (title, message) in
+            self?.showServerErrorAlert(title: title, message: message)
         }
     }
 

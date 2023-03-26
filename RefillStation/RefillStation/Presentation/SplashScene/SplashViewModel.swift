@@ -11,13 +11,14 @@ final class SplashViewModel {
 
     var startOnboardingFlow: (() -> Void)?
     var startHomeFlow: (() -> Void)?
+    var showErrorAlert: ((_ title: String, _ description: String) -> Void)?
 
     func startFlow() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
             guard let self = self else { return }
             Task {
                 if await !self.isServerAlive() {
-                    // show error alert
+                    self.showErrorAlert?("서버 에러", "현재 서버가 열려있지 않아요 😢")
                 } else if self.didLoginSuccessed() {
                     self.startHomeFlow?()
                 } else {
