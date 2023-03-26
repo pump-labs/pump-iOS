@@ -10,7 +10,7 @@ import SnapKit
 
 final class SplashViewController: UIViewController {
 
-//    var cooridnator: 
+    var cooridnator: SplashCoordinator?
     private let viewModel: SplashViewModel
     private let splashImageView = UIImageView(image: Asset.Images.iconPump.image)
 
@@ -29,7 +29,16 @@ final class SplashViewController: UIViewController {
     }
 
     private func bind() {
-        
+        viewModel.startHomeFlow = { [weak self] in
+            DispatchQueue.main.async {
+                self?.cooridnator?.startHome()
+            }
+        }
+        viewModel.startOnboardingFlow = { [weak self] in
+            DispatchQueue.main.async {
+                self?.cooridnator?.startOnboarding()
+            }
+        }
     }
 
     private func layout() {

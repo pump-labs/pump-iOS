@@ -29,6 +29,8 @@
 		322E15EE297A6C5300FE2E2F /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15ED297A6C5300FE2E2F /* MyPageViewModel.swift */; };
 		323F879529D01F1C00024B65 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323F879429D01F1C00024B65 /* SplashViewController.swift */; };
 		323F879729D01F2200024B65 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323F879629D01F2200024B65 /* SplashViewModel.swift */; };
+		323F879929D0257600024B65 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323F879829D0257600024B65 /* SplashCoordinator.swift */; };
+		323F879B29D0266300024B65 /* SplashDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323F879A29D0266300024B65 /* SplashDIContainer.swift */; };
 		32409866295F51DB00911306 /* DetailReviewTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32409865295F51DB00911306 /* DetailReviewTagCollectionViewCell.swift */; };
 		3240987029602A7400911306 /* ProductCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3240986F29602A7400911306 /* ProductCategory.swift */; };
 		3240987229602B2300911306 /* ProductCategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3240987129602B2300911306 /* ProductCategoriesCell.swift */; };
@@ -251,6 +253,8 @@
 		322E15ED297A6C5300FE2E2F /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		323F879429D01F1C00024B65 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		323F879629D01F2200024B65 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		323F879829D0257600024B65 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		323F879A29D0266300024B65 /* SplashDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashDIContainer.swift; sourceTree = "<group>"; };
 		32409865295F51DB00911306 /* DetailReviewTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		3240986F29602A7400911306 /* ProductCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategory.swift; sourceTree = "<group>"; };
 		3240987129602B2300911306 /* ProductCategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoriesCell.swift; sourceTree = "<group>"; };
@@ -623,6 +627,7 @@
 			isa = PBXGroup;
 			children = (
 				325985E6294C525800D26A37 /* Coordinator.swift */,
+				323F879829D0257600024B65 /* SplashCoordinator.swift */,
 				325985EA294C529C00D26A37 /* OnboardingCoordinator.swift */,
 				32CCC0D42979311D00C04231 /* TabBarCoordinator.swift */,
 				325985F6294C544400D26A37 /* HomeCoordinator.swift */,
@@ -637,6 +642,7 @@
 			isa = PBXGroup;
 			children = (
 				325985E8294C527000D26A37 /* DIContainer.swift */,
+				323F879A29D0266300024B65 /* SplashDIContainer.swift */,
 				325985E4294C51BA00D26A37 /* OnboardingDIContainer.swift */,
 				32CCC0D22979302700C04231 /* TabBarDIContainer.swift */,
 				325985E2294C51A700D26A37 /* HomeDIContainer.swift */,
@@ -1592,6 +1598,7 @@
 				32DB355E2996AB9A00F699F4 /* AsyncUserInfoRepository.swift in Sources */,
 				329EF9132971F9AD004934E7 /* ReviewInfoCell.swift in Sources */,
 				FC94151A29867EEA009AEE71 /* TermsPermissionViewController.swift in Sources */,
+				323F879929D0257600024B65 /* SplashCoordinator.swift in Sources */,
 				FC47394929376E2200DB9BDB /* Store.swift in Sources */,
 				FC60D83A2962C36F00C676A6 /* StoreInfoCell.swift in Sources */,
 				3269F6D82996AC3100AAD8A9 /* AsyncCustomerSatisfactionRepositoryInterface.swift in Sources */,
@@ -1642,6 +1649,7 @@
 				325985F7294C544400D26A37 /* HomeCoordinator.swift in Sources */,
 				FC1FD6A12962C4AF00869F5F /* RegisterReviewPopUpViewController.swift in Sources */,
 				3210B527298F6DAC0034CBA7 /* Exception.swift in Sources */,
+				323F879B29D0266300024B65 /* SplashDIContainer.swift in Sources */,
 				FC94151C298692C3009AEE71 /* TermsDetailViewController.swift in Sources */,
 				32E6AE46298E80CD005AA542 /* ReviewDTO.swift in Sources */,
 				32B792332993A54D001145B0 /* CustomerSatisfactionDTO.swift in Sources */,

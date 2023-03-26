@@ -13,11 +13,14 @@ final class SplashViewModel {
     var startHomeFlow: (() -> Void)?
 
     func startFlow() {
-        Task {
-            if await isServerAlive() {
-                startOnboardingFlow?()
-            } else {
-                startHomeFlow?()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            Task {
+                if await self.isServerAlive() {
+                    self.startOnboardingFlow?()
+                } else {
+                    self.startHomeFlow?()
+                }
             }
         }
     }
