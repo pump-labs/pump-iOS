@@ -14,11 +14,13 @@ public enum NetworkError: Error {
     case jsonParseFailed
     case exceptionParseFailed
     case exception(errorMessage: String)
+    case responseConvertFailed
 }
 
 protocol NetworkServiceInterface {
     var baseURL: String { get }
     func dataTask<DTO: Decodable>(request: URLRequest) async throws -> DTO
+    func dataTask(request: URLRequest) async throws -> HTTPURLResponse
 }
 
 final class NetworkService: NetworkServiceInterface {
@@ -92,5 +94,26 @@ final class NetworkService: NetworkServiceInterface {
                 }.resume()
             })
         }
+    }
+
+    func dataTask(request: URLRequest) async throws -> HTTPURLResponse {
+        return try await withCheckedThrowingContinuation({ continuation in
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if error != nil {
+                    continuation.resume(throwing: NetworkError.sessionError)
+                    return
+                }
+                print("🌐 request: " + String(response?.url?.absoluteString ?? ""))
+                guard let httpResponse = response as? HTTPURLResponse,
+                      200...299 ~= httpResponse.statusCode else {
+                    continuation.resume(throwing: NetworkError.responseConvertFailed)
+                    print("🚨 response convert Failed")
+                    return
+                }
+
+                print("✅ status: \(httpResponse.statusCode)")
+                continuation.resume(returning: httpResponse)
+            }.resume()
+        })
     }
 }
