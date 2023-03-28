@@ -490,10 +490,6 @@ extension StoreDetailViewController {
                     self.reloadCellAt(indexPath: indexPath)
                 }
                 cell.reportButtonTapped = { [weak self] in
-                    if UserDefaults.standard.bool(forKey: "isLookAroundUser") {
-                        self?.coordinator?.showLookAroundLogin()
-                        return
-                    }
                     let reportPopUp = ReviewReportPopUpViewController(
                         viewModel: ReviewReportPopUpViewModel(reportedUserId: review.userId)
                     ) {
@@ -506,7 +502,16 @@ extension StoreDetailViewController {
                         }
                         self?.present(reportCompletePopUp, animated: false)
                     }
-                    self?.present(reportPopUp, animated: false)
+
+                    if UserDefaults.standard.bool(forKey: "isLookAroundUser") {
+                        self?.loginFeatureButtonTapped(
+                            shouldShowPopUp: true,
+                            title: "신고는 로그인이 필요해요!",
+                            description: nil
+                        )
+                    } else {
+                        self?.present(reportPopUp, animated: false)
+                    }
                 }
             }
     }
