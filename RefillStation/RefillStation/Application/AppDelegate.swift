@@ -15,24 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        var onboardingDIContainer: OnboardingDIContainer?
-        var onboardingCoordinator: OnboardingCoordinator?
+        var splashDIContainer: SplashDIContainer?
+        var splashCoordinator: SplashCoordinator?
         guard let kakaoNativeAppKey = Bundle.main.object(forInfoDictionaryKey: "KAKAO_NATIVE_APP_KEY")
                 as? String else { return false }
         KakaoSDK.initSDK(appKey: kakaoNativeAppKey)
-
         AppDelegate.setUpNavigationBar()
         window = UIWindow(frame: UIScreen.main.bounds)
         let rootViewController = UIViewController()
         window?.rootViewController = rootViewController
-        onboardingDIContainer = OnboardingDIContainer()
-        onboardingCoordinator = onboardingDIContainer?.makeOnboardingCoordinator()
+        splashDIContainer = SplashDIContainer()
+        splashCoordinator = splashDIContainer?.makeSplashCoordinator()
         checkFirstLaunch()
-        if didLoginSuccessed() {
-            onboardingCoordinator?.agreeAndStartButtonTapped()
-        } else {
-            onboardingCoordinator?.start()
-        }
+        splashCoordinator?.start()
         window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
         return true
