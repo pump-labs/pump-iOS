@@ -26,7 +26,13 @@ protocol NetworkServiceInterface {
 final class NetworkService: NetworkServiceInterface {
     static let shared = NetworkService()
 
-    let baseURL = "https://www.pump-api-dev.com"
+    var baseURL: String {
+        guard let path = Bundle.main.path(forResource: "SecretAccessKey", ofType: "plist"),
+              let dictionary = NSDictionary(contentsOfFile: path),
+              let baseURL = dictionary["BASE_URL"] as? String else { return "" }
+        return baseURL
+    }
+
     private var token: String? {
         if let token = KeychainManager.shared.getItem(key: "token") as? String {
             return token
