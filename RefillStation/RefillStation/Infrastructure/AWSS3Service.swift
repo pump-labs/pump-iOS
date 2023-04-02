@@ -39,7 +39,7 @@ public class AWSS3Service: AWSS3ServiceInterface {
     }
 
     private var awsAccessKey: NSDictionary {
-        guard let path = Bundle.main.path(forResource: "AWSAccessKey", ofType: "plist"),
+        guard let path = Bundle.main.path(forResource: "SecretAccessKey", ofType: "plist"),
               let dictionary = NSDictionary(contentsOfFile: path) else { return [:] }
         return dictionary
     }

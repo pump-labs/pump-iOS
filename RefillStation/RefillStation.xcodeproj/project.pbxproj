@@ -60,7 +60,7 @@
 		3269F6DC2996AD8D00AAD8A9 /* AsyncRegisterReviewRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269F6DB2996AD8D00AAD8A9 /* AsyncRegisterReviewRepositoryInterface.swift */; };
 		3269F6DE2996ADA700AAD8A9 /* AsyncRegisterReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269F6DD2996ADA700AAD8A9 /* AsyncRegisterReviewRepository.swift */; };
 		3269F6E32998A37800AAD8A9 /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269F6E22998A37800AAD8A9 /* NSAttributedStringExtension.swift */; };
-		3282FED32992391C00DBFE24 /* AWSAccessKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3282FED22992391C00DBFE24 /* AWSAccessKey.plist */; };
+		3282FED32992391C00DBFE24 /* SecretAccessKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3282FED22992391C00DBFE24 /* SecretAccessKey.plist */; };
 		329557462951992900F5AB53 /* StoreDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D9B22951864700131EB1 /* StoreDetailViewModel.swift */; };
 		329557472951992C00F5AB53 /* StoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D9B02951862E00131EB1 /* StoreDetailViewController.swift */; };
 		329827842995422200304B68 /* UITextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329827832995422200304B68 /* UITextViewExtension.swift */; };
@@ -289,7 +289,7 @@
 		3269F6DB2996AD8D00AAD8A9 /* AsyncRegisterReviewRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncRegisterReviewRepositoryInterface.swift; sourceTree = "<group>"; };
 		3269F6DD2996ADA700AAD8A9 /* AsyncRegisterReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncRegisterReviewRepository.swift; sourceTree = "<group>"; };
 		3269F6E22998A37800AAD8A9 /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
-		3282FED22992391C00DBFE24 /* AWSAccessKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AWSAccessKey.plist; sourceTree = "<group>"; };
+		3282FED22992391C00DBFE24 /* SecretAccessKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecretAccessKey.plist; sourceTree = "<group>"; };
 		329827832995422200304B68 /* UITextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewExtension.swift; sourceTree = "<group>"; };
 		3299C8912994B3F90086837F /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		329E80222977FA72004286B0 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -591,7 +591,7 @@
 				3244A209292DC13A00716A2B /* LaunchScreen.storyboard */,
 				3244A20C292DC13A00716A2B /* Info.plist */,
 				FCB00888299153FA0006FF53 /* Secrets.xcconfig */,
-				3282FED22992391C00DBFE24 /* AWSAccessKey.plist */,
+				3282FED22992391C00DBFE24 /* SecretAccessKey.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1507,7 +1507,7 @@
 				3244A233292DC48300716A2B /* .swiftlint.yml in Resources */,
 				FCEE10232934C385002E629D /* Colors.xcassets in Resources */,
 				FCB00889299153FA0006FF53 /* Secrets.xcconfig in Resources */,
-				3282FED32992391C00DBFE24 /* AWSAccessKey.plist in Resources */,
+				3282FED32992391C00DBFE24 /* SecretAccessKey.plist in Resources */,
 				3244A20B292DC13A00716A2B /* LaunchScreen.storyboard in Resources */,
 				3244A208292DC13A00716A2B /* Assets.xcassets in Resources */,
 				FCEE10252934C855002E629D /* images.xcassets in Resources */,
