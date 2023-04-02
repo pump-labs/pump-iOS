@@ -35,8 +35,9 @@ final class StoreDetailInfoViewCell: UICollectionViewCell {
     }()
     private let storeAddressLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.font(style: .bodyMedium)
+        label.font = UIFont.font(style: .bodyMediumOverTwoLine)
         label.textColor = Asset.Colors.gray5.color
+        label.numberOfLines = 0
         return label
     }()
     private lazy var checkVisitGuideButton: UIButton = {
@@ -96,7 +97,8 @@ final class StoreDetailInfoViewCell: UICollectionViewCell {
         contentView.frame.width - storeNameLabelInsetSum : screenWidth - storeNameLabelInsetSum
         storeNameLabel.setText(text: store.name, font: .titleLarge1OverTwoLine)
         storeNameLabel.lineBreakStrategy = .hangulWordPriority
-        storeAddressLabel.setText(text: store.address, font: .bodyMedium)
+        storeAddressLabel.setText(text: store.address, font: .bodyMediumOverTwoLine)
+        storeAddressLabel.lineBreakStrategy = .hangulWordPriority
         setUpLikeCount(response: .init(recommendCount: store.recommendedCount,
                                        didRecommended: store.didUserRecommended))
         if let storeImageURL = URL(string: store.imageURL.first ?? "") {
@@ -114,6 +116,18 @@ final class StoreDetailInfoViewCell: UICollectionViewCell {
             $0.top.equalToSuperview().inset(26)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(newHeight).priority(.required)
+        }
+
+        let newSizeForAddress = storeAddressLabel.sizeThatFits(CGSize(width: targetWidth,
+                                                                      height: CGFloat.greatestFiniteMagnitude))
+        let newHeightForAddress = newSizeForAddress.height == 0 ? 17 : newSizeForAddress.height
+        storeAddressLabel.snp.remakeConstraints {
+            if storeInfoOuterView.subviews.contains(checkVisitGuideButton) {
+                $0.top.equalTo(checkVisitGuideButton.snp.bottom).offset(4).priority(.high)
+            }
+            $0.top.equalTo(storeNameLabel.snp.bottom).offset(16).priority(.low)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(newHeightForAddress)
         }
     }
 
@@ -166,7 +180,7 @@ final class StoreDetailInfoViewCell: UICollectionViewCell {
         storeAddressLabel.snp.makeConstraints {
             $0.top.equalTo(checkVisitGuideButton.snp.bottom).offset(4).priority(.high)
             $0.top.equalTo(storeNameLabel.snp.bottom).offset(16).priority(.low)
-            $0.leading.equalTo(storeNameLabel)
+            $0.leading.trailing.equalToSuperview().inset(16)
         }
         storeStackOuterView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(16)
