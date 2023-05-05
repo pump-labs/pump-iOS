@@ -25,6 +25,10 @@ final class StoreDetailViewModel {
 
     // MARK: - ProductList
     var products = [Product]()
+    var isProductEmpty: Bool {
+//        return products.isEmpty
+        return true
+    }
     private(set) var categories = [ProductCategory]()
     private(set) var currentCategoryFilter = ProductCategory.all
     var filteredProducts: [Product] {

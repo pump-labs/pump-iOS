@@ -214,6 +214,21 @@ extension StoreDetailViewController {
         var snapShot = NSDiffableDataSourceSnapshot<StoreDetailSection, StoreDetailItem>()
         switch viewModel.mode {
         case .productLists:
+            snapShot.appendSections([.storeDetailInfo, .tabBar])
+            if viewModel.isProductEmpty {
+                snapShot.appendSections([.noProduct])
+                snapShot.appendItems([.noProduct("")])
+            } else {
+                snapShot.appendSections([.productCategory, .filteredProductsCount, .productList])
+                snapShot.appendItems([.productCategory(.init(categories: viewModel.categories,
+                                                             currentFilter: viewModel.currentCategoryFilter))],
+                                     toSection: .productCategory)
+                snapShot.appendItems([.filteredProduct(viewModel.filteredProducts.count)],
+                                     toSection: .filteredProductsCount)
+                viewModel.filteredProducts.forEach {
+                    snapShot.appendItems([.productList($0)], toSection: .productList)
+                }
+            }
             snapShot.appendSections([.storeDetailInfo, .tabBar, .productCategory, .filteredProductsCount, .productList])
             snapShot.appendItems([.productCategory(.init(categories: viewModel.categories,
                                                          currentFilter: viewModel.currentCategoryFilter))],
@@ -245,6 +260,7 @@ extension StoreDetailViewController {
     private func diffableDataSource() -> UICollectionViewDiffableDataSource<StoreDetailSection, StoreDetailItem> {
         let storeDetailInfoCellRegisration = storeDetailInfoCellRegisration()
         let tabBarCellRegistration = tabBarCellRegistration()
+        let noProductCellRegistration = noProductCellRegistration()
         let productCategoriesCellRegistration = productCategoriesCellRegistration()
         let filteredCellRegistration = filteredCellRegistration()
         let productCellRegistration = productCellRegistration()
@@ -255,13 +271,18 @@ extension StoreDetailViewController {
         return UICollectionViewDiffableDataSource<StoreDetailSection, StoreDetailItem>(
             collectionView: collectionView) { [weak self] (collectionView, indexPath, itemIdentifier) in
                 guard let self = self else { return UICollectionViewCell() }
-                let storeDetailSection = self.storeSection(mode: self.viewModel.mode, sectionIndex: indexPath.section)
+                let storeDetailSection = self.storeSection(mode: self.viewModel.mode,
+                                                           sectionIndex: indexPath.section,
+                                                           noProduct: self.viewModel.isProductEmpty)
                 switch storeDetailSection {
                 case .storeDetailInfo:
                     return collectionView.dequeueConfiguredReusableCell(using: storeDetailInfoCellRegisration,
                                                                         for: indexPath, item: itemIdentifier)
                 case .tabBar:
                     return collectionView.dequeueConfiguredReusableCell(using: tabBarCellRegistration,
+                                                                        for: indexPath, item: itemIdentifier)
+                case .noProduct:
+                    return collectionView.dequeueConfiguredReusableCell(using: noProductCellRegistration,
                                                                         for: indexPath, item: itemIdentifier)
                 case .productCategory:
                     return collectionView.dequeueConfiguredReusableCell(using: productCategoriesCellRegistration,
@@ -424,6 +445,16 @@ extension StoreDetailViewController {
                     }
                 }
                 cell.setUpContents(mode: self.viewModel.mode)
+            }
+    }
+
+    private func noProductCellRegistration() -> UICollectionView.CellRegistration<NoProductCell, StoreDetailItem> {
+        return UICollectionView
+            .CellRegistration<NoProductCell, StoreDetailItem> { [weak self] (cell, indexPath, item) in
+                guard let self = self else { return }
+                cell.buttonTapped = {
+
+                }
             }
     }
 
