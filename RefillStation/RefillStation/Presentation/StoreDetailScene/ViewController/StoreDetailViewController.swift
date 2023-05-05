@@ -398,8 +398,9 @@ extension StoreDetailViewController {
     private func storeDetailInfoCellRegisration() -> UICollectionView.CellRegistration<StoreDetailInfoViewCell, StoreDetailItem> {
         return UICollectionView
             .CellRegistration<StoreDetailInfoViewCell, StoreDetailItem> { [weak self] (cell, indexPath, item) in
-                guard case let .storeDetailInfo(store) = item else { return }
-                cell.setUpContents(store: store)
+                guard case let .storeDetailInfo(store) = item,
+                      let self = self else { return }
+                cell.setUpContents(store: store, screenWidth: self.view.frame.width)
                 cell.storeButtonTapped = { [weak self] in
                     guard let self = self else { return }
                     self.storeDetailButtonTapped(buttonType: $0)
