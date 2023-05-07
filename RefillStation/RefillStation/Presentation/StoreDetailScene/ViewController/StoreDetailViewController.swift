@@ -165,9 +165,10 @@ final class StoreDetailViewController: UIViewController, ServerAlertable, LoginA
     private func storeDetailButtonTapped(buttonType: StoreDetailViewModel.StoreInfoButtonType) {
         switch buttonType {
         case .phone:
-            let phoneNumber = viewModel.store.phoneNumber
+            let phoneNumber = viewModel.store.phoneNumber.filter { $0.isWholeNumber }
+            print(phoneNumber)
             if !phoneNumber.isEmpty,
-               let url = URL(string: "tel://\(phoneNumber.replacingOccurrences(of: "-", with: ""))"),
+               let url = URL(string: "tel://\(phoneNumber)"),
                UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
@@ -360,7 +361,7 @@ extension StoreDetailViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewLayout
 extension StoreDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let section = storeSection(mode: viewModel.mode, sectionIndex: indexPath.section)
+        let section = storeSection(mode: viewModel.mode, sectionIndex: indexPath.section, noProduct: viewModel.isProductEmpty)
         let width = collectionView.frame.width
         let height = section.cellHeight
 
@@ -441,11 +442,7 @@ extension StoreDetailViewController {
 
     private func noProductCellRegistration() -> UICollectionView.CellRegistration<NoProductCell, StoreDetailItem> {
         return UICollectionView
-            .CellRegistration<NoProductCell, StoreDetailItem> { [weak self] (cell, indexPath, item) in
-                guard let self = self else { return }
-                cell.buttonTapped = {
-
-                }
+            .CellRegistration<NoProductCell, StoreDetailItem> { (cell, indexPath, item) in
             }
     }
 

@@ -27,13 +27,13 @@ final class NoProductCell: UICollectionViewCell {
         let label = UILabel()
         label.applyFont(font: .buttonLarge)
         label.textColor = Asset.Colors.gray6.color
-        label.numberOfLines = 2
         label.text = "판매상품이 궁금해요"
         return label
     }()
+
     private lazy var productCuriousButtonView: UIView = {
         let buttonView = UIView()
-        let pumpCharacterImageView = UIImageView(image: Asset.Images.avatar.image)
+        let pumpCharacterImageView = UIImageView(image: Asset.Images.pumping.image)
         pumpCharacterImageView.layer.cornerRadius = 10
         buttonView.backgroundColor = .white
         [pumpCharacterImageView, curiousLabel].forEach { buttonView.addSubview($0) }
@@ -46,12 +46,12 @@ final class NoProductCell: UICollectionViewCell {
             $0.top.bottom.equalToSuperview().inset(13)
             $0.trailing.equalToSuperview().inset(13)
         }
-        buttonView.layer.cornerRadius = 24
+        buttonView.layer.cornerRadius = 22
         buttonView.layer.borderWidth = 1
         buttonView.layer.borderColor = Asset.Colors.gray3.color.cgColor
         buttonView.isUserInteractionEnabled = true
         buttonView.addGestureRecognizer(UITapGestureRecognizer(target: self,
-                                                               action: #selector(buttonViewTapped(_:))))
+                                                               action: #selector(buttonViewTapped)))
         return buttonView
     }()
 
@@ -85,6 +85,7 @@ final class NoProductCell: UICollectionViewCell {
         productCuriousButtonView.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
+            $0.width.equalTo(174)
         }
 
         curiousCountLabel.snp.makeConstraints {
@@ -94,7 +95,20 @@ final class NoProductCell: UICollectionViewCell {
     }
 
     @objc
-    private func buttonViewTapped(_ sender: UITapGestureRecognizer) {
+    private func buttonViewTapped() {
+        productCuriousButtonView.backgroundColor = Asset.Colors.primary1.color
+        curiousLabel.textColor = Asset.Colors.primary9.color
+        curiousCountLabel.changeColor(targetString: "먼저", color: Asset.Colors.primary9.color)
         buttonTapped?()
+    }
+}
+
+fileprivate extension UILabel {
+    func changeColor(targetString: String, color: UIColor) {
+        let fullText = text ?? ""
+        let attributedString = NSMutableAttributedString(string: fullText)
+        let range = (fullText as NSString).range(of: targetString)
+        attributedString.addAttribute(.foregroundColor, value: color, range: range)
+        attributedText = attributedString
     }
 }
