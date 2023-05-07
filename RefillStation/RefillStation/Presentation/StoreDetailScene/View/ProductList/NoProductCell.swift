@@ -17,6 +17,9 @@ final class NoProductCell: UICollectionViewCell {
         let label = UILabel()
         label.applyFont(font: .bodyMediumOverTwoLine)
         label.textColor = Asset.Colors.gray4.color
+        label.text = "아직 판매상품 정보가 없어요.\n버튼을 눌러주시면 가게에 의견을 전달드려요."
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
 
@@ -25,6 +28,7 @@ final class NoProductCell: UICollectionViewCell {
         label.applyFont(font: .buttonLarge)
         label.textColor = Asset.Colors.gray6.color
         label.numberOfLines = 2
+        label.text = "판매상품이 궁금해요"
         return label
     }()
     private lazy var productCuriousButtonView: UIView = {
@@ -35,7 +39,7 @@ final class NoProductCell: UICollectionViewCell {
         [pumpCharacterImageView, curiousLabel].forEach { buttonView.addSubview($0) }
         pumpCharacterImageView.snp.makeConstraints {
             $0.width.height.equalTo(20)
-            $0.top.leading.trailing.equalToSuperview().inset(12)
+            $0.top.leading.bottom.equalToSuperview().inset(12)
         }
         curiousLabel.snp.makeConstraints {
             $0.leading.equalTo(pumpCharacterImageView.snp.trailing).offset(8)
@@ -55,6 +59,7 @@ final class NoProductCell: UICollectionViewCell {
         let label = UILabel()
         label.applyFont(font: .captionLarge)
         label.textColor = Asset.Colors.gray4.color
+        label.text = "가장 먼저 버튼을 눌러주세요"
         return label
     }()
 
@@ -83,7 +88,7 @@ final class NoProductCell: UICollectionViewCell {
         }
 
         curiousCountLabel.snp.makeConstraints {
-            $0.top.equalTo(12)
+            $0.top.equalTo(productCuriousButtonView.snp.bottom).offset(12)
             $0.centerX.equalToSuperview()
         }
     }

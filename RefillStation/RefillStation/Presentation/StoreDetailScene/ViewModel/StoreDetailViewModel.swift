@@ -16,7 +16,7 @@ final class StoreDetailViewModel {
     var showErrorAlert: ((String?, String?) -> Void)?
 
     // MARK: - TabBarMode
-    var mode: TabBarMode = .productLists {
+    var mode: TabBarMode = .operationInfo {
         didSet { operationInfoSeeMoreIndexPaths.removeAll() }
     }
 

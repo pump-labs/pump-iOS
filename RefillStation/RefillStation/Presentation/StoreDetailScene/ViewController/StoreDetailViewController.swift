@@ -212,9 +212,9 @@ final class StoreDetailViewController: UIViewController, ServerAlertable, LoginA
 extension StoreDetailViewController {
     private func applyDataSource(withAnimation: Bool = true) {
         var snapShot = NSDiffableDataSourceSnapshot<StoreDetailSection, StoreDetailItem>()
+        snapShot.appendSections([.storeDetailInfo, .tabBar])
         switch viewModel.mode {
         case .productLists:
-            snapShot.appendSections([.storeDetailInfo, .tabBar])
             if viewModel.isProductEmpty {
                 snapShot.appendSections([.noProduct])
                 snapShot.appendItems([.noProduct("")])
@@ -229,23 +229,14 @@ extension StoreDetailViewController {
                     snapShot.appendItems([.productList($0)], toSection: .productList)
                 }
             }
-            snapShot.appendSections([.storeDetailInfo, .tabBar, .productCategory, .filteredProductsCount, .productList])
-            snapShot.appendItems([.productCategory(.init(categories: viewModel.categories,
-                                                         currentFilter: viewModel.currentCategoryFilter))],
-                                 toSection: .productCategory)
-            snapShot.appendItems([.filteredProduct(viewModel.filteredProducts.count)],
-                                 toSection: .filteredProductsCount)
-            viewModel.filteredProducts.forEach {
-                snapShot.appendItems([.productList($0)], toSection: .productList)
-            }
         case .reviews:
-            snapShot.appendSections([.storeDetailInfo, .tabBar, .reviewOverview, .review])
+            snapShot.appendSections([.reviewOverview, .review])
             snapShot.appendItems([.reviewOverview(viewModel.reviews)], toSection: .reviewOverview)
             viewModel.reviews.forEach {
                 snapShot.appendItems([.review($0)], toSection: .review)
             }
         case .operationInfo:
-            snapShot.appendSections([.storeDetailInfo, .tabBar, .operationNotice, .operationInfo])
+            snapShot.appendSections([.operationNotice, .operationInfo])
             snapShot.appendItems([.oprationNotice("")], toSection: .operationNotice)
             viewModel.operationInfos.forEach {
                 snapShot.appendItems([.operationInfo($0)], toSection: .operationInfo)
@@ -399,7 +390,7 @@ extension StoreDetailViewController: UICollectionViewDelegateFlowLayout {
                 .systemLayoutSizeFitting(CGSize(width: width, height: height)).height
             return CGSize(width: width, height: heightThatFits)
         } else if section == .reviewOverview && viewModel.totalTagVoteCount < 10 {
-                return CGSize(width: width, height: 414)
+            return CGSize(width: width, height: 414)
         } else if section == .storeDetailInfo {
             let dummyCellForCalculateheight = StoreDetailInfoViewCell(
                 frame: CGRect(origin: .zero, size: CGSize(width: width, height: height))
