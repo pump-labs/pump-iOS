@@ -46,7 +46,7 @@ final class NetworkService: NetworkServiceInterface {
 
     func dataTask<DTO: Decodable>(request: URLRequest) async throws -> DTO {
         var request = request
-        if let token {
+        if let token = token {
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         } else {
             print("There is no jwt token")

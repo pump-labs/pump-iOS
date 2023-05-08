@@ -76,4 +76,32 @@ final class AsyncStoreRepository: AsyncStoreRepositoryInterface {
         let recommendDTO: StoreRecommendDTO = try await networkService.dataTask(request: request)
         return recommendDTO.toResponseValue()
     }
+
+    func fetchEnterToServiceRequestCount(storeId: Int) async throws -> FetchEnterToServiceCountResponseValue {
+        var urlComponents = URLComponents(string: networkService.baseURL)
+        urlComponents?.path = "/api/request-store/\(storeId)"
+        guard let request = urlComponents?.toURLRequest(method: .get) else {
+            return .init(requestCount: 0, didRequested: false)
+        }
+        let requestEnterServiceDTO: EnterServiceInfoDTO = try await networkService.dataTask(request: request)
+        return requestEnterServiceDTO.toResponseValue()
+    }
+
+    func requestEnterToService(requestValue: RequestEnterToServiceRequestValue) async throws -> RequestEnterToServiceResponseValue {
+        var urlComponents = URLComponents(string: networkService.baseURL)
+        urlComponents?.path = "/api/request-store"
+        guard let requestBody = try? JSONEncoder()
+            .encode(RequestEnterServiceRequestDTO(storeId: requestValue.storeId)) else {
+            throw RepositoryError.requestParseFailed
+        }
+        guard let request = urlComponents?.toURLRequest(
+            method: requestValue.type == .request ? .post : .delete,
+            httpBody: requestBody
+        ) else {
+            throw RepositoryError.urlParseFailed
+        }
+
+        let requestEnterServiceDTO: EnterServiceInfoDTO = try await networkService.dataTask(request: request)
+        return requestEnterServiceDTO.toResponseValue()
+    }
 }

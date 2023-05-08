@@ -135,22 +135,22 @@ final class StoreDetailTabBarCell: UICollectionViewCell {
             contentView.addSubview($0)
         }
 
-        productListButton.snp.makeConstraints {
+        operationInfoButton.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.top.equalToSuperview().inset(15)
         }
 
         reviewButton.snp.makeConstraints {
-            $0.leading.equalTo(productListSelectLine.snp.trailing).offset(Constraint.tabSpacing)
+            $0.leading.equalTo(operationInfoSelectLine.snp.trailing).offset(Constraint.tabSpacing)
             $0.top.equalToSuperview().inset(15)
         }
 
-        operationInfoButton.snp.makeConstraints {
+        productListButton.snp.makeConstraints {
             $0.leading.equalTo(reviewButton.snp.trailing).offset(Constraint.tabSpacing)
             $0.top.equalToSuperview().inset(15)
         }
 
-        [productListButton, reviewButton, operationInfoButton].forEach {
+        [operationInfoButton, reviewButton, productListButton].forEach {
             $0.setContentHuggingPriority(.required, for: .vertical)
         }
 
@@ -162,14 +162,13 @@ final class StoreDetailTabBarCell: UICollectionViewCell {
 
         divisionLine.layer.zPosition = Constraint.divisionLineZPosition
 
-        productListSelectLine.snp.makeConstraints {
-            $0.leading.equalTo(productListButton)
-            $0.width.equalTo(productListButton).multipliedBy(Constraint.selectLineMultiplier)
+        operationInfoSelectLine.snp.makeConstraints {
+            $0.centerX.equalTo(operationInfoButton)
+            $0.width.equalTo(operationInfoButton).multipliedBy(Constraint.selectLineMultiplier)
             $0.centerY.equalTo(divisionLine)
             $0.height.equalTo(Constraint.selectLineHeight)
         }
-
-        productListSelectLine.layer.zPosition = Constraint.selectLineZPosition
+        operationInfoSelectLine.layer.zPosition = Constraint.selectLineZPosition
 
         reviewSelectLine.snp.makeConstraints {
             $0.centerX.equalTo(reviewButton)
@@ -180,14 +179,14 @@ final class StoreDetailTabBarCell: UICollectionViewCell {
 
         reviewSelectLine.layer.zPosition = Constraint.selectLineZPosition
 
-        operationInfoSelectLine.snp.makeConstraints {
-            $0.centerX.equalTo(operationInfoButton)
-            $0.width.equalTo(operationInfoButton).multipliedBy(Constraint.selectLineMultiplier)
+        productListSelectLine.snp.makeConstraints {
+            $0.leading.equalTo(productListButton)
+            $0.width.equalTo(productListButton).multipliedBy(Constraint.selectLineMultiplier)
             $0.centerY.equalTo(divisionLine)
             $0.height.equalTo(Constraint.selectLineHeight)
         }
 
-        operationInfoSelectLine.layer.zPosition = Constraint.selectLineZPosition
+        productListSelectLine.layer.zPosition = Constraint.selectLineZPosition
     }
 }
 

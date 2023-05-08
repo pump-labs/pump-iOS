@@ -20,6 +20,8 @@ struct Store: Hashable {
     let businessHour: [BusinessHour]
     let notice: String
     let storeRefillGuideImagePaths: [String]
+    var didUserRequestedEnter: Bool
+    var requestEnterCount: Int
 }
 
 struct BusinessHour: Hashable {

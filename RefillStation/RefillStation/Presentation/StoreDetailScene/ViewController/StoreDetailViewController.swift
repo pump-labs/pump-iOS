@@ -165,9 +165,10 @@ final class StoreDetailViewController: UIViewController, ServerAlertable, LoginA
     private func storeDetailButtonTapped(buttonType: StoreDetailViewModel.StoreInfoButtonType) {
         switch buttonType {
         case .phone:
-            let phoneNumber = viewModel.store.phoneNumber
+            let phoneNumber = viewModel.store.phoneNumber.filter { $0.isWholeNumber }
+            print(phoneNumber)
             if !phoneNumber.isEmpty,
-               let url = URL(string: "tel://\(phoneNumber.replacingOccurrences(of: "-", with: ""))"),
+               let url = URL(string: "tel://\(phoneNumber)"),
                UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
@@ -212,25 +213,31 @@ final class StoreDetailViewController: UIViewController, ServerAlertable, LoginA
 extension StoreDetailViewController {
     private func applyDataSource(withAnimation: Bool = true) {
         var snapShot = NSDiffableDataSourceSnapshot<StoreDetailSection, StoreDetailItem>()
+        snapShot.appendSections([.storeDetailInfo, .tabBar])
         switch viewModel.mode {
         case .productLists:
-            snapShot.appendSections([.storeDetailInfo, .tabBar, .productCategory, .filteredProductsCount, .productList])
-            snapShot.appendItems([.productCategory(.init(categories: viewModel.categories,
-                                                         currentFilter: viewModel.currentCategoryFilter))],
-                                 toSection: .productCategory)
-            snapShot.appendItems([.filteredProduct(viewModel.filteredProducts.count)],
-                                 toSection: .filteredProductsCount)
-            viewModel.filteredProducts.forEach {
-                snapShot.appendItems([.productList($0)], toSection: .productList)
+            if viewModel.isProductEmpty {
+                snapShot.appendSections([.noProduct])
+                snapShot.appendItems([.noProduct(viewModel.store)])
+            } else {
+                snapShot.appendSections([.productCategory, .filteredProductsCount, .productList])
+                snapShot.appendItems([.productCategory(.init(categories: viewModel.categories,
+                                                             currentFilter: viewModel.currentCategoryFilter))],
+                                     toSection: .productCategory)
+                snapShot.appendItems([.filteredProduct(viewModel.filteredProducts.count)],
+                                     toSection: .filteredProductsCount)
+                viewModel.filteredProducts.forEach {
+                    snapShot.appendItems([.productList($0)], toSection: .productList)
+                }
             }
         case .reviews:
-            snapShot.appendSections([.storeDetailInfo, .tabBar, .reviewOverview, .review])
+            snapShot.appendSections([.reviewOverview, .review])
             snapShot.appendItems([.reviewOverview(viewModel.reviews)], toSection: .reviewOverview)
             viewModel.reviews.forEach {
                 snapShot.appendItems([.review($0)], toSection: .review)
             }
         case .operationInfo:
-            snapShot.appendSections([.storeDetailInfo, .tabBar, .operationNotice, .operationInfo])
+            snapShot.appendSections([.operationNotice, .operationInfo])
             snapShot.appendItems([.oprationNotice("")], toSection: .operationNotice)
             viewModel.operationInfos.forEach {
                 snapShot.appendItems([.operationInfo($0)], toSection: .operationInfo)
@@ -245,6 +252,7 @@ extension StoreDetailViewController {
     private func diffableDataSource() -> UICollectionViewDiffableDataSource<StoreDetailSection, StoreDetailItem> {
         let storeDetailInfoCellRegisration = storeDetailInfoCellRegisration()
         let tabBarCellRegistration = tabBarCellRegistration()
+        let noProductCellRegistration = noProductCellRegistration()
         let productCategoriesCellRegistration = productCategoriesCellRegistration()
         let filteredCellRegistration = filteredCellRegistration()
         let productCellRegistration = productCellRegistration()
@@ -255,13 +263,18 @@ extension StoreDetailViewController {
         return UICollectionViewDiffableDataSource<StoreDetailSection, StoreDetailItem>(
             collectionView: collectionView) { [weak self] (collectionView, indexPath, itemIdentifier) in
                 guard let self = self else { return UICollectionViewCell() }
-                let storeDetailSection = self.storeSection(mode: self.viewModel.mode, sectionIndex: indexPath.section)
+                let storeDetailSection = self.storeSection(mode: self.viewModel.mode,
+                                                           sectionIndex: indexPath.section,
+                                                           noProduct: self.viewModel.isProductEmpty)
                 switch storeDetailSection {
                 case .storeDetailInfo:
                     return collectionView.dequeueConfiguredReusableCell(using: storeDetailInfoCellRegisration,
                                                                         for: indexPath, item: itemIdentifier)
                 case .tabBar:
                     return collectionView.dequeueConfiguredReusableCell(using: tabBarCellRegistration,
+                                                                        for: indexPath, item: itemIdentifier)
+                case .noProduct:
+                    return collectionView.dequeueConfiguredReusableCell(using: noProductCellRegistration,
                                                                         for: indexPath, item: itemIdentifier)
                 case .productCategory:
                     return collectionView.dequeueConfiguredReusableCell(using: productCategoriesCellRegistration,
@@ -348,7 +361,7 @@ extension StoreDetailViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewLayout
 extension StoreDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let section = storeSection(mode: viewModel.mode, sectionIndex: indexPath.section)
+        let section = storeSection(mode: viewModel.mode, sectionIndex: indexPath.section, noProduct: viewModel.isProductEmpty)
         let width = collectionView.frame.width
         let height = section.cellHeight
 
@@ -378,7 +391,7 @@ extension StoreDetailViewController: UICollectionViewDelegateFlowLayout {
                 .systemLayoutSizeFitting(CGSize(width: width, height: height)).height
             return CGSize(width: width, height: heightThatFits)
         } else if section == .reviewOverview && viewModel.totalTagVoteCount < 10 {
-                return CGSize(width: width, height: 414)
+            return CGSize(width: width, height: 414)
         } else if section == .storeDetailInfo {
             let dummyCellForCalculateheight = StoreDetailInfoViewCell(
                 frame: CGRect(origin: .zero, size: CGSize(width: width, height: height))
@@ -424,6 +437,26 @@ extension StoreDetailViewController {
                     }
                 }
                 cell.setUpContents(mode: self.viewModel.mode)
+            }
+    }
+
+    private func noProductCellRegistration() -> UICollectionView.CellRegistration<NoProductCell, StoreDetailItem> {
+        return UICollectionView
+            .CellRegistration<NoProductCell, StoreDetailItem> { [weak self] (cell, indexPath, item) in
+                guard let self = self else { return }
+                cell.setUpContents(requestCount: self.viewModel.store.requestEnterCount,
+                                   didRequested: self.viewModel.store.didUserRequestedEnter)
+                cell.buttonTapped = { [weak self] in
+                    if UserDefaults.standard.bool(forKey: "isLookAroundUser") {
+                        self?.loginFeatureButtonTapped(
+                            shouldShowPopUp: true,
+                            title: "입점 신청은 로그인이 필요해요!",
+                            description: nil
+                        )
+                    } else {
+                        self?.viewModel.requestEnterToServiceButtonTapped()
+                    }
+                }
             }
     }
 

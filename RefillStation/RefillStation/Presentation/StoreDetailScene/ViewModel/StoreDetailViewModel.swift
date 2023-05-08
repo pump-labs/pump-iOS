@@ -16,7 +16,7 @@ final class StoreDetailViewModel {
     var showErrorAlert: ((String?, String?) -> Void)?
 
     // MARK: - TabBarMode
-    var mode: TabBarMode = .productLists {
+    var mode: TabBarMode = .operationInfo {
         didSet { operationInfoSeeMoreIndexPaths.removeAll() }
     }
 
@@ -25,6 +25,9 @@ final class StoreDetailViewModel {
 
     // MARK: - ProductList
     var products = [Product]()
+    var isProductEmpty: Bool {
+        return products.isEmpty
+    }
     private(set) var categories = [ProductCategory]()
     private(set) var currentCategoryFilter = ProductCategory.all
     var filteredProducts: [Product] {
@@ -92,6 +95,10 @@ final class StoreDetailViewModel {
     private var recommendStoreTask: Cancellable?
     private let fetchStoreRecommendUseCase: FetchStoreRecommendUseCaseInterface
     private var storeRecommendLoadTask: Cancellable?
+    private let fetchEnterToServiceCountUseCase: FetchEnterToServiceCountUseCaseInterface
+    private var requestEnterLoadTask: Cancellable?
+    private let requestEnterToServiceUseCase: RequestEnterToServiceUseCaseInterface
+    private var requestEnterTask: Cancellable?
 
     // MARK: - Init
     init(
@@ -99,13 +106,17 @@ final class StoreDetailViewModel {
         fetchProductsUseCase: FetchProductsUseCaseInterface = FetchProductsUseCase(),
         fetchStoreReviewsUseCase: FetchStoreReviewsUseCaseInterface = FetchStoreReviewsUseCase(),
         recommendStoreUseCase: RecommendStoreUseCaseInterface = RecommendStoreUseCase(),
-        fetchStoreRecommendUseCase: FetchStoreRecommendUseCaseInterface = FetchStoreRecommendUseCase()
+        fetchStoreRecommendUseCase: FetchStoreRecommendUseCaseInterface = FetchStoreRecommendUseCase(),
+        fetchEnterToServiceCountUseCase: FetchEnterToServiceCountUseCaseInterface = FetchEnterToServiceCountUseCase(),
+        requestEnterToServiceUseCase: RequestEnterToServiceUseCaseInterface = RequestEnterToServiceUseCase()
     ) {
         self.store = store
         self.fetchProductsUseCase = fetchProductsUseCase
         self.fetchStoreReviewsUseCase = fetchStoreReviewsUseCase
         self.recommendStoreUseCase = recommendStoreUseCase
         self.fetchStoreRecommendUseCase = fetchStoreRecommendUseCase
+        self.fetchEnterToServiceCountUseCase = fetchEnterToServiceCountUseCase
+        self.requestEnterToServiceUseCase = requestEnterToServiceUseCase
     }
 
     // MARK: - Input
@@ -145,6 +156,25 @@ final class StoreDetailViewModel {
         }
     }
 
+    func requestEnterToServiceButtonTapped() {
+        guard isAbleToRequest() else { return }
+        let requestType: RequestEnterToServiceRequestValue.`Type` = store.didUserRequestedEnter ? .cancel : .request
+        requestEnterTask = Task {
+            do {
+                let response = try await requestEnterToServiceUseCase.execute(
+                    requestValue: .init(storeId: store.storeId, type: requestType)
+                )
+                store.requestEnterCount = response.requestCount
+                store.didUserRequestedEnter = response.didRequested
+                applyDataSourceWithoutAnimation?()
+            } catch NetworkError.exception(errorMessage: let message) {
+                showErrorAlert?(message, nil)
+            } catch {
+                print(error)
+            }
+        }
+    }
+
     // MARK: - Private functions
     private func isAbleToRecommend() -> Bool {
         guard let lastRecommendedTime = UserDefaults.standard.object(forKey: "lastRecommended") as? Date else {
@@ -160,6 +190,23 @@ final class StoreDetailViewModel {
             return false
         }
         UserDefaults.standard.set(Date(), forKey: "lastRecommended")
+        return dateToCompare < Date()
+    }
+
+    private func isAbleToRequest() -> Bool {
+        guard let lastRequestedTime = UserDefaults.standard.object(forKey: "lastRequested") as? Date else {
+            UserDefaults.standard.set(Date(), forKey: "lastRequested")
+            return true
+        }
+
+        guard let dateToCompare = Calendar.current.date(
+            byAdding: .nanosecond,
+            value: 500_000_000,
+            to: lastRequestedTime
+        ) else {
+            return false
+        }
+        UserDefaults.standard.set(Date(), forKey: "lastRequested")
         return dateToCompare < Date()
     }
 
@@ -212,6 +259,22 @@ final class StoreDetailViewModel {
         }
     }
 
+    private func fetchEnterToServiceCount() {
+        requestEnterLoadTask = Task {
+            do {
+                let response = try await fetchEnterToServiceCountUseCase.execute(storeId: store.storeId)
+                store.didUserRequestedEnter = response.didRequested
+                store.requestEnterCount = response.requestCount
+                print(response, store.didUserRequestedEnter, store.requestEnterCount)
+                applyDataSourceWithoutAnimation?()
+            } catch NetworkError.exception(errorMessage: let message) {
+                showErrorAlert?(message, nil)
+            } catch {
+                print(error)
+            }
+        }
+    }
+
     private func setUpCategories() {
         products.forEach {
             if !categories.contains($0.category) {
@@ -253,6 +316,7 @@ extension StoreDetailViewModel {
     func viewDidLoad() {
         fetchProducts()
         fetchStoreRecommend()
+        fetchEnterToServiceCount()
     }
 
     func viewWillAppear() {

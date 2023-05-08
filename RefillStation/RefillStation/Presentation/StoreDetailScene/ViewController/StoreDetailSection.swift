@@ -10,6 +10,7 @@ import UIKit
 extension StoreDetailViewController {
     enum StoreDetailItem: Hashable {
         case storeDetailInfo(Store)
+        case noProduct(Store)
         case productList(Product)
         case review(Review)
         case reviewOverview([Review])
@@ -23,6 +24,7 @@ extension StoreDetailViewController {
     enum StoreDetailSection: Int, CaseIterable {
         case storeDetailInfo
         case tabBar
+        case noProduct
         case productCategory
         case filteredProductsCount
         case productList
@@ -37,6 +39,8 @@ extension StoreDetailViewController {
                 return 0
             case .tabBar:
                 return 1
+            case .noProduct:
+                return 2
             case .productCategory:
                 return 2
             case .filteredProductsCount:
@@ -60,6 +64,8 @@ extension StoreDetailViewController {
                 return StoreDetailInfoViewCell.self
             case .tabBar:
                 return StoreDetailTabBarCell.self
+            case .noProduct:
+                return NoProductCell.self
             case .productCategory:
                 return ProductCategoriesCell.self
             case .filteredProductsCount:
@@ -83,6 +89,8 @@ extension StoreDetailViewController {
                 return StoreDetailInfoViewCell.reuseIdentifier
             case .tabBar:
                 return StoreDetailTabBarCell.reuseIdentifier
+            case .noProduct:
+                return NoProductCell.reuseIdentifier
             case .productCategory:
                 return ProductCategoriesCell.reuseIdentifier
             case .filteredProductsCount:
@@ -106,6 +114,8 @@ extension StoreDetailViewController {
                 return 500
             case .tabBar:
                 return 56
+            case .noProduct:
+                return 500
             case .productCategory:
                 return 67
             case .filteredProductsCount:
@@ -125,7 +135,7 @@ extension StoreDetailViewController {
 
         var contentInset: NSDirectionalEdgeInsets {
             switch self {
-            case .storeDetailInfo, .reviewOverview, .review, .productCategory, .tabBar, .operationNotice:
+            case .storeDetailInfo, .reviewOverview, .review, .productCategory, .tabBar, .operationNotice, .noProduct:
                 return .zero
             default:
                 return .init(top: 0, leading: 16, bottom: 0, trailing: 16)
@@ -133,7 +143,7 @@ extension StoreDetailViewController {
         }
     }
 
-    func storeSection(mode: StoreDetailViewModel.TabBarMode, sectionIndex: Int) -> StoreDetailSection {
+    func storeSection(mode: StoreDetailViewModel.TabBarMode, sectionIndex: Int, noProduct: Bool = false) -> StoreDetailSection {
         if sectionIndex == StoreDetailSection.storeDetailInfo.sectionIndex {
             return StoreDetailSection.storeDetailInfo
         } else if sectionIndex == StoreDetailSection.tabBar.sectionIndex {
@@ -142,7 +152,11 @@ extension StoreDetailViewController {
 
         switch (mode, sectionIndex) {
         case (.productLists, 2):
-            return StoreDetailSection.productCategory
+            if noProduct {
+                return StoreDetailSection.noProduct
+            } else {
+                return StoreDetailSection.productCategory
+            }
         case (.productLists, 3):
             return StoreDetailSection.filteredProductsCount
         case (.productLists, 4):

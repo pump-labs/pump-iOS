@@ -13,4 +13,6 @@ protocol AsyncStoreRepositoryInterface {
     func fetchStoreReviews(requestValue: FetchStoreReviewsRequestValue) async throws -> [Review]
     func fetchStoreRecommend(requestValue: FetchStoreRecommendRequestValue) async throws -> FetchStoreRecommendResponseValue
     func recommendStore(requestValue: RecommendStoreRequestValue) async throws -> RecommendStoreResponseValue
+    func fetchEnterToServiceRequestCount(storeId: Int) async throws -> FetchEnterToServiceCountResponseValue
+    func requestEnterToService(requestValue: RequestEnterToServiceRequestValue) async throws -> RequestEnterToServiceResponseValue
 }

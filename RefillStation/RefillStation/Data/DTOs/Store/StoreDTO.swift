@@ -64,7 +64,9 @@ extension StoreDTO {
                 }) ?? .mon, time: dto.time)
             } ?? [],
             notice: notice ?? "",
-            storeRefillGuideImagePaths: storeRefillGuides.compactMap { $0.imgPath }
+            storeRefillGuideImagePaths: storeRefillGuides.compactMap { $0.imgPath },
+            didUserRequestedEnter: false,
+            requestEnterCount: 0
         )
     }
 }
