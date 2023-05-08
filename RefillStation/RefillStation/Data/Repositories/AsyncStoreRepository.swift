@@ -77,15 +77,31 @@ final class AsyncStoreRepository: AsyncStoreRepositoryInterface {
         return recommendDTO.toResponseValue()
     }
 
-    func fetchEnterToServiceRequestCount() async throws -> FetchEnterToServiceCountResponseValue {
-        return .init(requestCount: 0, didRequested: true)
+    func fetchEnterToServiceRequestCount(storeId: Int) async throws -> FetchEnterToServiceCountResponseValue {
+        var urlComponents = URLComponents(string: networkService.baseURL)
+        urlComponents?.path = "/api/request-store/\(storeId)"
+        guard let request = urlComponents?.toURLRequest(method: .get) else {
+            return .init(requestCount: 0, didRequested: false)
+        }
+        let requestEnterServiceDTO: EnterServiceInfoDTO = try await networkService.dataTask(request: request)
+        return requestEnterServiceDTO.toResponseValue()
     }
 
-    func requestEnterToService() async throws -> RequestEnterToServiceResponseValue {
-        return .init(requestCount: 0, didRequested: true)
-    }
+    func requestEnterToService(requestValue: RequestEnterToServiceRequestValue) async throws -> RequestEnterToServiceResponseValue {
+        var urlComponents = URLComponents(string: networkService.baseURL)
+        urlComponents?.path = "/api/request-store"
+        guard let requestBody = try? JSONEncoder()
+            .encode(RequestEnterServiceRequestDTO(storeId: requestValue.storeId)) else {
+            throw RepositoryError.requestParseFailed
+        }
+        guard let request = urlComponents?.toURLRequest(
+            method: requestValue.type == .request ? .post : .delete,
+            httpBody: requestBody
+        ) else {
+            throw RepositoryError.urlParseFailed
+        }
 
-    func cancelEnterToService() async throws -> RequestEnterToServiceResponseValue {
-        return .init(requestCount: 0, didRequested: true)
+        let requestEnterServiceDTO: EnterServiceInfoDTO = try await networkService.dataTask(request: request)
+        return requestEnterServiceDTO.toResponseValue()
     }
 }

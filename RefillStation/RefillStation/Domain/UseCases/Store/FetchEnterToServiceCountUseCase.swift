@@ -25,7 +25,7 @@ final class FetchEnterToServiceCountUseCase: FetchEnterToServiceCountUseCaseInte
     }
 
     func execute(storeId: Int) async throws -> FetchEnterToServiceCountResponseValue {
-        return try await storeRepository.fetchEnterToServiceRequestCount()
+        return try await storeRepository.fetchEnterToServiceRequestCount(storeId: storeId)
     }
 }
 

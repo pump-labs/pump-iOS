@@ -34,6 +34,6 @@ final class RequestEnterToServiceUseCase: RequestEnterToServiceUseCaseInterface 
     }
 
     func execute(requestValue: RequestEnterToServiceRequestValue) async throws -> RequestEnterToServiceResponseValue {
-        return try await storeRepository.requestEnterToService()
+        return try await storeRepository.requestEnterToService(requestValue: requestValue)
     }
 }
