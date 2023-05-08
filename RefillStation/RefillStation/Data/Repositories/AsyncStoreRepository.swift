@@ -76,4 +76,16 @@ final class AsyncStoreRepository: AsyncStoreRepositoryInterface {
         let recommendDTO: StoreRecommendDTO = try await networkService.dataTask(request: request)
         return recommendDTO.toResponseValue()
     }
+
+    func fetchEnterToServiceRequestCount() async throws -> FetchEnterToServiceCountResponseValue {
+        return .init(requestCount: 0, didRequested: true)
+    }
+
+    func requestEnterToService() async throws -> RequestEnterToServiceResponseValue {
+        return .init(requestCount: 0, didRequested: true)
+    }
+
+    func cancelEnterToService() async throws -> RequestEnterToServiceResponseValue {
+        return .init(requestCount: 0, didRequested: true)
+    }
 }
