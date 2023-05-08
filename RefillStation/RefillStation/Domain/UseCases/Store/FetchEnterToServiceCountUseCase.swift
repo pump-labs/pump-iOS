@@ -28,4 +28,3 @@ final class FetchEnterToServiceCountUseCase: FetchEnterToServiceCountUseCaseInte
         return try await storeRepository.fetchEnterToServiceRequestCount(storeId: storeId)
     }
 }
-

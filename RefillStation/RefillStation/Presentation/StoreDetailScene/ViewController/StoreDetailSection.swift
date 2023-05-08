@@ -10,7 +10,7 @@ import UIKit
 extension StoreDetailViewController {
     enum StoreDetailItem: Hashable {
         case storeDetailInfo(Store)
-        case noProduct(String)
+        case noProduct(Store)
         case productList(Product)
         case review(Review)
         case reviewOverview([Review])

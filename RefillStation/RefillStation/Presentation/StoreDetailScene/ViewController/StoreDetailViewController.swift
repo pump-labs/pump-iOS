@@ -218,7 +218,7 @@ extension StoreDetailViewController {
         case .productLists:
             if viewModel.isProductEmpty {
                 snapShot.appendSections([.noProduct])
-                snapShot.appendItems([.noProduct("")])
+                snapShot.appendItems([.noProduct(viewModel.store)])
             } else {
                 snapShot.appendSections([.productCategory, .filteredProductsCount, .productList])
                 snapShot.appendItems([.productCategory(.init(categories: viewModel.categories,
@@ -442,7 +442,21 @@ extension StoreDetailViewController {
 
     private func noProductCellRegistration() -> UICollectionView.CellRegistration<NoProductCell, StoreDetailItem> {
         return UICollectionView
-            .CellRegistration<NoProductCell, StoreDetailItem> { (cell, indexPath, item) in
+            .CellRegistration<NoProductCell, StoreDetailItem> { [weak self] (cell, indexPath, item) in
+                guard let self = self else { return }
+                cell.setUpContents(requestCount: self.viewModel.store.requestEnterCount,
+                                   didRequested: self.viewModel.store.didUserRequestedEnter)
+                cell.buttonTapped = { [weak self] in
+                    if UserDefaults.standard.bool(forKey: "isLookAroundUser") {
+                        self?.loginFeatureButtonTapped(
+                            shouldShowPopUp: true,
+                            title: "입점 신청은 로그인이 필요해요!",
+                            description: nil
+                        )
+                    } else {
+                        self?.viewModel.requestEnterToServiceButtonTapped()
+                    }
+                }
             }
     }
 
