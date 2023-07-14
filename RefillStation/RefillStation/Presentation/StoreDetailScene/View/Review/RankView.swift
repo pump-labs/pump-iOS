@@ -45,7 +45,7 @@ final class FirstRankView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = Asset.Colors.gray0.color
         layout()
     }
 

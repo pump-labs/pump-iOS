@@ -12,7 +12,7 @@ final class OperationInfoCell: UICollectionViewCell {
     static let reuseIdentifier = String(describing: OperationInfoCell.self)
 
     private let contentLabelDefaultHeight: CGFloat = 20
-    private let contentLabelInsetSum: CGFloat = 135
+    private let contentLabelInsetSum: CGFloat = 165
 
     private let imageView: UIImageView = {
         let imageView = UIImageView()
