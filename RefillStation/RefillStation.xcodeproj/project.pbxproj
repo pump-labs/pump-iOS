@@ -30,6 +30,7 @@
 		3229B5642A60EB40005A0A58 /* AsyncDailyQuizRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5632A60EB40005A0A58 /* AsyncDailyQuizRepository.swift */; };
 		3229B5662A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5652A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift */; };
 		3229B5682A60F5CB005A0A58 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5672A60F5CB005A0A58 /* SelectionView.swift */; };
+		3229B5702A6128A0005A0A58 /* StackScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B56F2A6128A0005A0A58 /* StackScrollViewController.swift */; };
 		322E15E4297A0B3600FE2E2F /* MyPageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E3297A0B3600FE2E2F /* MyPageDIContainer.swift */; };
 		322E15E6297A0B6600FE2E2F /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E5297A0B6600FE2E2F /* MyPageCoordinator.swift */; };
 		322E15E8297A0CD700FE2E2F /* RegisterReviewDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E7297A0CD700FE2E2F /* RegisterReviewDIContainer.swift */; };
@@ -274,6 +275,7 @@
 		3229B5632A60EB40005A0A58 /* AsyncDailyQuizRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDailyQuizRepository.swift; sourceTree = "<group>"; };
 		3229B5652A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDailyQuizRepositoryInterface.swift; sourceTree = "<group>"; };
 		3229B5672A60F5CB005A0A58 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		3229B56F2A6128A0005A0A58 /* StackScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackScrollViewController.swift; sourceTree = "<group>"; };
 		322E15E3297A0B3600FE2E2F /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
 		322E15E5297A0B6600FE2E2F /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
 		322E15E7297A0CD700FE2E2F /* RegisterReviewDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterReviewDIContainer.swift; sourceTree = "<group>"; };
@@ -1448,6 +1450,7 @@
 				FCAB262A296FEC9D000461F0 /* PumpLargeTitleNavigationBar.swift */,
 				FC90448B2965E2E500B43BB9 /* PumpTagView.swift */,
 				32C22964297D35BA0019EAF6 /* PumpPopUpViewController.swift */,
+				3229B56F2A6128A0005A0A58 /* StackScrollViewController.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1745,6 +1748,7 @@
 				32CCC0D32979302700C04231 /* TabBarDIContainer.swift in Sources */,
 				FC60D83B2962C36F00C676A6 /* TagReviewCell.swift in Sources */,
 				FC7D3529292F22B300335AAB /* StoreDetailInfoStackView.swift in Sources */,
+				3229B5702A6128A0005A0A58 /* StackScrollViewController.swift in Sources */,
 				FC60D8382962C36F00C676A6 /* Section.swift in Sources */,
 				3229B5662A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift in Sources */,
 				322E15E4297A0B3600FE2E2F /* MyPageDIContainer.swift in Sources */,
