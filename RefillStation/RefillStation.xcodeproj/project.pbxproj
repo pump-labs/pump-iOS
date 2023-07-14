@@ -29,6 +29,7 @@
 		3229B5622A60EABC005A0A58 /* FetchDailyQuizUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5612A60EABC005A0A58 /* FetchDailyQuizUseCase.swift */; };
 		3229B5642A60EB40005A0A58 /* AsyncDailyQuizRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5632A60EB40005A0A58 /* AsyncDailyQuizRepository.swift */; };
 		3229B5662A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5652A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift */; };
+		3229B5682A60F5CB005A0A58 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5672A60F5CB005A0A58 /* SelectionView.swift */; };
 		322E15E4297A0B3600FE2E2F /* MyPageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E3297A0B3600FE2E2F /* MyPageDIContainer.swift */; };
 		322E15E6297A0B6600FE2E2F /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E5297A0B6600FE2E2F /* MyPageCoordinator.swift */; };
 		322E15E8297A0CD700FE2E2F /* RegisterReviewDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E7297A0CD700FE2E2F /* RegisterReviewDIContainer.swift */; };
@@ -272,6 +273,7 @@
 		3229B5612A60EABC005A0A58 /* FetchDailyQuizUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDailyQuizUseCase.swift; sourceTree = "<group>"; };
 		3229B5632A60EB40005A0A58 /* AsyncDailyQuizRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDailyQuizRepository.swift; sourceTree = "<group>"; };
 		3229B5652A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDailyQuizRepositoryInterface.swift; sourceTree = "<group>"; };
+		3229B5672A60F5CB005A0A58 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		322E15E3297A0B3600FE2E2F /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
 		322E15E5297A0B6600FE2E2F /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
 		322E15E7297A0CD700FE2E2F /* RegisterReviewDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterReviewDIContainer.swift; sourceTree = "<group>"; };
@@ -1142,6 +1144,7 @@
 			isa = PBXGroup;
 			children = (
 				FC4739402936AB3300DB9BDB /* StoreCollectionViewCell.swift */,
+				3229B5672A60F5CB005A0A58 /* SelectionView.swift */,
 				FC84FAC4293AB04800428AAA /* RegionRequestHeaderView.swift */,
 				FCD9721B298D7C9000E27792 /* RegionRequestCollectionViewCell.swift */,
 				3229B5592A60E20A005A0A58 /* DailyQuizCollectionViewCell.swift */,
@@ -1736,6 +1739,7 @@
 				FCEE10312934D287002E629D /* Assets+Generated.swift in Sources */,
 				FCB0088729914ECC0006FF53 /* SignUpDTO.swift in Sources */,
 				FC4739412936AB3300DB9BDB /* StoreCollectionViewCell.swift in Sources */,
+				3229B5682A60F5CB005A0A58 /* SelectionView.swift in Sources */,
 				323F87A229D1E14800024B65 /* AsyncSplashRepository.swift in Sources */,
 				32A0F5012981764D00A04ECC /* OAuthLoginUseCase.swift in Sources */,
 				32CCC0D32979302700C04231 /* TabBarDIContainer.swift in Sources */,
