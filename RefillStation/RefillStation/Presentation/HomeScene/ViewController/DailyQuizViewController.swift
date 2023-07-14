@@ -51,7 +51,8 @@ final class DailyQuizViewController: UIViewController {
         button.backgroundColor = Asset.Colors.primary9.color
         button.setTitleColor(.white, for: .normal)
         button.addAction(UIAction { [weak self] _ in
-//            self.
+            // TODO: 서버에 제출하고 검사하기
+            self?.coordinator?.showDailyQuizAnswer()
         }, for: .touchUpInside)
         return button
     }()
@@ -79,6 +80,12 @@ final class DailyQuizViewController: UIViewController {
     }
 
     private func setUpNavigationBar() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
         let appearance = AppDelegate.transparentNavigationBarAppearance()
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance

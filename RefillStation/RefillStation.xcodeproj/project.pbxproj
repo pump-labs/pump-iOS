@@ -30,6 +30,8 @@
 		3229B5642A60EB40005A0A58 /* AsyncDailyQuizRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5632A60EB40005A0A58 /* AsyncDailyQuizRepository.swift */; };
 		3229B5662A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5652A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift */; };
 		3229B5682A60F5CB005A0A58 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5672A60F5CB005A0A58 /* SelectionView.swift */; };
+		3229B56C2A612014005A0A58 /* DailyQuizAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B56B2A612014005A0A58 /* DailyQuizAnswerViewController.swift */; };
+		3229B56E2A6123DC005A0A58 /* DailyQuizAnswerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B56D2A6123DC005A0A58 /* DailyQuizAnswerViewModel.swift */; };
 		3229B5702A6128A0005A0A58 /* StackScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B56F2A6128A0005A0A58 /* StackScrollViewController.swift */; };
 		322E15E4297A0B3600FE2E2F /* MyPageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E3297A0B3600FE2E2F /* MyPageDIContainer.swift */; };
 		322E15E6297A0B6600FE2E2F /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E5297A0B6600FE2E2F /* MyPageCoordinator.swift */; };
@@ -275,6 +277,8 @@
 		3229B5632A60EB40005A0A58 /* AsyncDailyQuizRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDailyQuizRepository.swift; sourceTree = "<group>"; };
 		3229B5652A60EB5D005A0A58 /* AsyncDailyQuizRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDailyQuizRepositoryInterface.swift; sourceTree = "<group>"; };
 		3229B5672A60F5CB005A0A58 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		3229B56B2A612014005A0A58 /* DailyQuizAnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuizAnswerViewController.swift; sourceTree = "<group>"; };
+		3229B56D2A6123DC005A0A58 /* DailyQuizAnswerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyQuizAnswerViewModel.swift; path = ../ViewController/DailyQuizAnswerViewModel.swift; sourceTree = "<group>"; };
 		3229B56F2A6128A0005A0A58 /* StackScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackScrollViewController.swift; sourceTree = "<group>"; };
 		322E15E3297A0B3600FE2E2F /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
 		322E15E5297A0B6600FE2E2F /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
@@ -1159,6 +1163,7 @@
 			children = (
 				FC4739432937664F00DB9BDB /* HomeViewController.swift */,
 				3229B55B2A60E4A2005A0A58 /* DailyQuizViewController.swift */,
+				3229B56B2A612014005A0A58 /* DailyQuizAnswerViewController.swift */,
 				3229B5572A60E006005A0A58 /* HomeSection.swift */,
 			);
 			path = ViewController;
@@ -1168,6 +1173,7 @@
 			isa = PBXGroup;
 			children = (
 				FC47394629376BA500DB9BDB /* HomeViewModel.swift */,
+				3229B56D2A6123DC005A0A58 /* DailyQuizAnswerViewModel.swift */,
 				3229B55D2A60E4B8005A0A58 /* DailyQuizViewModel.swift */,
 			);
 			path = ViewModel;
@@ -1662,6 +1668,7 @@
 				32DB354A29966F3000F699F4 /* WithdrawDTO.swift in Sources */,
 				3229B55E2A60E4B8005A0A58 /* DailyQuizViewModel.swift in Sources */,
 				32DDE65F29866CCB008AFDB2 /* LoginViewController.swift in Sources */,
+				3229B56E2A6123DC005A0A58 /* DailyQuizAnswerViewModel.swift in Sources */,
 				32F2D9D529518F5900131EB1 /* ProductCell.swift in Sources */,
 				FC60D8412962C36F00C676A6 /* RegisterReviewViewController.swift in Sources */,
 				3243A2E22A08DA710011B3ED /* FetchEnterToServiceCountUseCase.swift in Sources */,
@@ -1675,6 +1682,7 @@
 				325985E5294C51BA00D26A37 /* OnboardingDIContainer.swift in Sources */,
 				32DB355E2996AB9A00F699F4 /* AsyncUserInfoRepository.swift in Sources */,
 				329EF9132971F9AD004934E7 /* ReviewInfoCell.swift in Sources */,
+				3229B56C2A612014005A0A58 /* DailyQuizAnswerViewController.swift in Sources */,
 				FC94151A29867EEA009AEE71 /* TermsPermissionViewController.swift in Sources */,
 				323F879929D0257600024B65 /* SplashCoordinator.swift in Sources */,
 				3229B55C2A60E4A2005A0A58 /* DailyQuizViewController.swift in Sources */,

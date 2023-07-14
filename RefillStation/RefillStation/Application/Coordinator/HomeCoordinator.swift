@@ -51,4 +51,15 @@ final class HomeCoordinator: Coordinator {
     func popDailyQuiz() {
         navigationController.popViewController(animated: true)
     }
+
+    func showDailyQuizAnswer() {
+        let dailyQuizAnswerViewController = DIContainer.makeDailyQuizAnswerViewController()
+        dailyQuizAnswerViewController.coordinator = self
+        navigationController.popToRootViewController(animated: false)
+        navigationController.pushViewController(dailyQuizAnswerViewController, animated: true)
+    }
+
+    func popDailyQuizAnswer() {
+        navigationController.popToRootViewController(animated: true)
+    }
 }

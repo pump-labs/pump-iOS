@@ -55,4 +55,12 @@ final class HomeDIContainer: DIContainer {
     func makeDailyQuizViewModel() -> DailyQuizViewModel {
         return DailyQuizViewModel()
     }
+
+    func makeDailyQuizAnswerViewController() -> DailyQuizAnswerViewController {
+        return DailyQuizAnswerViewController(viewModel: makeDailyQuizAnswerViewModel())
+    }
+
+    func makeDailyQuizAnswerViewModel() -> DailyQuizAnswerViewModel {
+        return DailyQuizAnswerViewModel()
+    }
 }
