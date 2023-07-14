@@ -12,15 +12,23 @@ final class SelectionView: UIView {
         didSet { applySelectionState() }
     }
 
-    private let selectionTextLabel: UILabel = {
+    private lazy var selectionTextLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.layer.borderWidth = 1
+        label.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(selectionTapped(_:))
+        )
+        label.addGestureRecognizer(tapGesture)
         return label
     }()
 
     init(selectionText: String) {
         super.init(frame: .zero)
         selectionTextLabel.text = selectionText
+        applySelectionState()
         layout()
     }
 
@@ -32,11 +40,17 @@ final class SelectionView: UIView {
         addSubview(selectionTextLabel)
         selectionTextLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
+            $0.height.equalTo(50)
         }
     }
 
     private func applySelectionState() {
-        layer.borderColor = selectionState.color.cgColor
+        selectionTextLabel.layer.borderColor = selectionState.color.cgColor
+    }
+
+    @objc
+    private func selectionTapped(_ sender: UITapGestureRecognizer) {
+        selectionState = selectionState ==  .selected ? .unselected : .selected
     }
 }
 

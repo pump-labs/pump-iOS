@@ -268,26 +268,49 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 { return }
-        coordinator?.showStoreDetail(store: viewModel.stores[indexPath.row])
+        switch HomeSection(rawValue: indexPath.section) {
+        case .dailyQuiz:
+            navigationController?.pushViewController(
+                DailyQuizViewController(viewModel: DailyQuizViewModel()),
+                animated: true
+            ) // TODO: move logic to coordinator
+        case .stores:
+            coordinator?.showStoreDetail(store: viewModel.stores[indexPath.row])
+        default:
+            break
+        }
     }
 }
 
 extension HomeViewController: SkeletonCollectionViewDataSource {
     func numSections(in collectionSkeletonView: UICollectionView) -> Int {
-        return 2
+        return HomeSection.allCases.count
     }
 
     func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        if indexPath.section == 0 {
+        switch HomeSection(rawValue: indexPath.section) {
+        case .dailyQuiz:
+            return DailyQuizCollectionViewCell.reuseIdentifier
+        case .requestRegion:
             return RegionRequestCollectionViewCell.reuseIdentifier
-        } else {
+        case .stores:
             return StoreCollectionViewCell.reuseIdentifier
+        default:
+            return ""
         }
     }
 
     func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 0 : UICollectionView.automaticNumberOfSkeletonItems
+        switch HomeSection(rawValue: section) {
+        case .dailyQuiz:
+            return 1 // TODO: daily quiz 풀었는지 여부로 분기처리
+        case .requestRegion:
+            return viewModel.shouldShowRequestRegion ? 0 : 1
+        case .stores:
+            return viewModel.stores.count
+        default:
+            return 0
+        }
     }
 }
 

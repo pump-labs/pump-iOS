@@ -12,6 +12,12 @@ protocol FetchDailyQuizUseCaseInterFace {
 }
 
 final class FetchDailyQuizUseCase: FetchDailyQuizUseCaseInterFace {
+    private let dailyQuizRepository: AsyncDailyQuizRepositoryInterface
+
+    init(dailyQuizRepository: AsyncDailyQuizRepositoryInterface = AsyncDailyQuizRepository()) {
+        self.dailyQuizRepository = dailyQuizRepository
+    }
+
     func execute() async throws -> DailyQuiz {
         return .init(quiz: "", selections: [], answer: "", hint: "")
     }
