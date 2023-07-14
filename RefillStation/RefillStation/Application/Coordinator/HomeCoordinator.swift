@@ -55,8 +55,11 @@ final class HomeCoordinator: Coordinator {
     func showDailyQuizAnswer() {
         let dailyQuizAnswerViewController = DIContainer.makeDailyQuizAnswerViewController()
         dailyQuizAnswerViewController.coordinator = self
-        navigationController.popToRootViewController(animated: false)
         navigationController.pushViewController(dailyQuizAnswerViewController, animated: true)
+        if let lastViewControllerIndex = navigationController.viewControllers
+            .lastElementIndex() {
+            navigationController.viewControllers.remove(at: lastViewControllerIndex - 1)
+        }
     }
 
     func popDailyQuizAnswer() {
