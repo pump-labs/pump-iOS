@@ -46,4 +46,13 @@ final class HomeDIContainer: DIContainer {
     func makeRequestRegionViewModel() -> RequestRegionViewModel {
         return RequestRegionViewModel()
     }
+
+    // MARK: - Daily Quiz
+    func makeDailyQuizViewController() -> DailyQuizViewController {
+        return DailyQuizViewController(viewModel: makeDailyQuizViewModel())
+    }
+
+    func makeDailyQuizViewModel() -> DailyQuizViewModel {
+        return DailyQuizViewModel()
+    }
 }

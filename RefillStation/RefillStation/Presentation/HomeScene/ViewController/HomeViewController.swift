@@ -270,10 +270,7 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch HomeSection(rawValue: indexPath.section) {
         case .dailyQuiz:
-            navigationController?.pushViewController(
-                DailyQuizViewController(viewModel: DailyQuizViewModel()),
-                animated: true
-            ) // TODO: move logic to coordinator
+            coordinator?.showDailyQuiz()
         case .stores:
             coordinator?.showStoreDetail(store: viewModel.stores[indexPath.row])
         default:

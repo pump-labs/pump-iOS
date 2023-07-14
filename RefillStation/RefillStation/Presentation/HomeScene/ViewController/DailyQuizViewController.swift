@@ -9,6 +9,7 @@ import UIKit
 
 final class DailyQuizViewController: UIViewController {
 
+    var coordinator: HomeCoordinator?
     private let viewModel: DailyQuizViewModel
 
     private let outerScrollView: UIScrollView = {
