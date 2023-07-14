@@ -51,6 +51,8 @@ final class HomeViewController: UIViewController, ServerAlertable, LoginAlertabl
                                 forCellWithReuseIdentifier: StoreCollectionViewCell.reuseIdentifier)
         collectionView.register(RegionRequestCollectionViewCell.self,
                                 forCellWithReuseIdentifier: RegionRequestCollectionViewCell.reuseIdentifier)
+        collectionView.register(DailyQuizCollectionViewCell.self,
+                                forCellWithReuseIdentifier: DailyQuizCollectionViewCell.reuseIdentifier)
         collectionView.register(RegionRequestHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: RegionRequestHeaderView.reuseIdentifier)
@@ -172,16 +174,31 @@ final class HomeViewController: UIViewController, ServerAlertable, LoginAlertabl
 
 extension HomeViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return HomeSection.allCases.count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let requestRegionHeaderCount = viewModel.shouldShowRequestRegion ? 0 : 1
-        return section == 0 ? requestRegionHeaderCount : viewModel.stores.count
+        switch HomeSection(rawValue: section) {
+        case .dailyQuiz:
+            return 1 // TODO: daily quiz 풀었는지 여부로 분기처리
+        case .requestRegion:
+            return viewModel.shouldShowRequestRegion ? 0 : 1
+        case .stores:
+            return viewModel.stores.count
+        default:
+            return 0
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
+        switch HomeSection(rawValue: indexPath.section) {
+        case .dailyQuiz:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: DailyQuizCollectionViewCell.reuseIdentifier,
+                for: indexPath
+            ) as? DailyQuizCollectionViewCell else { return UICollectionViewCell() }
+            return cell
+        case .requestRegion:
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: RegionRequestCollectionViewCell.reuseIdentifier,
                 for: indexPath) as? RegionRequestCollectionViewCell else {
@@ -200,7 +217,7 @@ extension HomeViewController: UICollectionViewDataSource {
                 }
             }
             return cell
-        } else {
+        case .stores:
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: StoreCollectionViewCell.reuseIdentifier,
                 for: indexPath) as? StoreCollectionViewCell else {
@@ -213,16 +230,23 @@ extension HomeViewController: UICollectionViewDataSource {
                                address: data.address,
                                distance: data.distance)
             return cell
+        default:
+            return UICollectionViewCell()
         }
     }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 0 {
+        switch HomeSection(rawValue: indexPath.section) {
+        case .dailyQuiz:
+            return CGSize(width: collectionView.frame.width, height: 100)
+        case .requestRegion:
             return CGSize(width: collectionView.frame.width, height: 333)
-        } else {
+        case .stores:
             return CGSize(width: collectionView.frame.width - 32, height: 267)
+        default:
+            return .zero
         }
     }
 

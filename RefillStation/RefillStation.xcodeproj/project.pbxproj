@@ -21,6 +21,8 @@
 		321A64222998EACB0089635C /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A64212998EACB0089635C /* UIViewControllerExtension.swift */; };
 		322982EE29907CC20081B288 /* URLComponentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322982ED29907CC20081B288 /* URLComponentsExtension.swift */; };
 		322982F02990F5000081B288 /* AWSS3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322982EF2990F5000081B288 /* AWSS3Service.swift */; };
+		3229B5582A60E006005A0A58 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5572A60E006005A0A58 /* HomeSection.swift */; };
+		3229B55A2A60E20A005A0A58 /* DailyQuizCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229B5592A60E20A005A0A58 /* DailyQuizCollectionViewCell.swift */; };
 		322E15E4297A0B3600FE2E2F /* MyPageDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E3297A0B3600FE2E2F /* MyPageDIContainer.swift */; };
 		322E15E6297A0B6600FE2E2F /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E5297A0B6600FE2E2F /* MyPageCoordinator.swift */; };
 		322E15E8297A0CD700FE2E2F /* RegisterReviewDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322E15E7297A0CD700FE2E2F /* RegisterReviewDIContainer.swift */; };
@@ -256,6 +258,8 @@
 		321A64212998EACB0089635C /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		322982ED29907CC20081B288 /* URLComponentsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsExtension.swift; sourceTree = "<group>"; };
 		322982EF2990F5000081B288 /* AWSS3Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSS3Service.swift; sourceTree = "<group>"; };
+		3229B5572A60E006005A0A58 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
+		3229B5592A60E20A005A0A58 /* DailyQuizCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuizCollectionViewCell.swift; sourceTree = "<group>"; };
 		322E15E3297A0B3600FE2E2F /* MyPageDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDIContainer.swift; sourceTree = "<group>"; };
 		322E15E5297A0B6600FE2E2F /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
 		322E15E7297A0CD700FE2E2F /* RegisterReviewDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterReviewDIContainer.swift; sourceTree = "<group>"; };
@@ -1128,6 +1132,7 @@
 				FC4739402936AB3300DB9BDB /* StoreCollectionViewCell.swift */,
 				FC84FAC4293AB04800428AAA /* RegionRequestHeaderView.swift */,
 				FCD9721B298D7C9000E27792 /* RegionRequestCollectionViewCell.swift */,
+				3229B5592A60E20A005A0A58 /* DailyQuizCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1136,6 +1141,7 @@
 			isa = PBXGroup;
 			children = (
 				FC4739432937664F00DB9BDB /* HomeViewController.swift */,
+				3229B5572A60E006005A0A58 /* HomeSection.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1733,6 +1739,7 @@
 				32DB627229816943008C2522 /* EditProfileUseCase.swift in Sources */,
 				32E85CBC2A04E4D90066AE67 /* UILabel+Typograpy.swift in Sources */,
 				32DB354C2996739B00F699F4 /* RandomNicknameDTO.swift in Sources */,
+				3229B5582A60E006005A0A58 /* HomeSection.swift in Sources */,
 				FC47394729376BA500DB9BDB /* HomeViewModel.swift in Sources */,
 				FCBB8F7F297D2EED009287EF /* NicknameViewModel.swift in Sources */,
 				32DB6270298168C4008C2522 /* ValidNicknameUseCase.swift in Sources */,
@@ -1748,6 +1755,7 @@
 				FC083C482992B4A4002DD943 /* AccountManagementViewController.swift in Sources */,
 				329E80272977FA72004286B0 /* OnboardingViewController.swift in Sources */,
 				3243A2E62A08DCF90011B3ED /* EnterServiceInfoDTO.swift in Sources */,
+				3229B55A2A60E20A005A0A58 /* DailyQuizCollectionViewCell.swift in Sources */,
 				329827842995422200304B68 /* UITextViewExtension.swift in Sources */,
 				FC60D83C2962C36F00C676A6 /* ReviewDescriptionCell.swift in Sources */,
 				32409866295F51DB00911306 /* DetailReviewTagCollectionViewCell.swift in Sources */,
