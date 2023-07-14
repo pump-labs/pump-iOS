@@ -67,6 +67,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return scrollEdgeAppearance
     }
 
+    static func transparentNavigationBarAppearance() -> UINavigationBarAppearance {
+        let backButtonImage = Asset.Images.iconArrowLeft.image
+            .withAlignmentRectInsets(.init(top: 0, left: -8, bottom: 0, right: 0))
+        let scrollEdgeAppearance = UINavigationBarAppearance()
+        scrollEdgeAppearance.configureWithTransparentBackground()
+        scrollEdgeAppearance.backgroundColor = .white
+        scrollEdgeAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        scrollEdgeAppearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
+        return scrollEdgeAppearance
+    }
+
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
